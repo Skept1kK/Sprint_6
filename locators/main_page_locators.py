@@ -29,4 +29,3 @@ class MainPageLocators:
     # Локаторы для лого в шапке
     header_logo_scooter = (By.XPATH, '//a[@href="/" and contains(@class, "Header_LogoScooter")]')
     header_logo_yandex = (By.XPATH, '//a[@href="//yandex.ru" and contains(@class, "Header_LogoYandex")]')
-

@@ -3,7 +3,6 @@ import allure
 from conftest import driver
 from page.main_page import MainPage
 from page.order_page import OrderPage
-from page.base_page import BasePage
 from data import URLS
 
 class TestLogoRedirect:
@@ -21,9 +20,8 @@ class TestLogoRedirect:
     @allure.title('Тестирование перехода на страницу "Дзен" с помощью клика на лого "Яндекс"')
     def test_redirect_to_dzen(self, driver):
         main_page = MainPage(driver)
-        base_page= BasePage(driver)
         main_page.wait_visibility_logo_yandex()
         main_page.click_logo_yandex()
-        base_page.switch_to_new_window()
-        base_page.wait_for_new_window()
-        assert driver.current_url == URLS.DZEN_URL
+        main_page.switch_to_new_window()
+        main_page.wait_for_new_window(URLS.DZEN_URL)
+        assert main_page.current_url() == URLS.DZEN_URL

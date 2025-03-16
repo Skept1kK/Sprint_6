@@ -3,6 +3,7 @@ class URLS:
     ORDER_PAGE_URL = 'https://qa-scooter.praktikum-services.ru/order'
     DZEN_URL = "https://dzen.ru/?yredirect=true"
     BLANK_URL = "about:blank"
+    BASE_URL = 'https://qa-scooter.praktikum-services.ru/'
 
 
 

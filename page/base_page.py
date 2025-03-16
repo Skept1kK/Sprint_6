@@ -20,6 +20,14 @@ class BasePage:
                      else EC.presence_of_element_located)
         return WebDriverWait(self.driver, timeout).until(condition(locator))
 
+    @allure.step('Получаем текущий URL')
+    def current_url(self):
+        return self.driver.current_url
+
+    @allure.step('Ждем загрузки новой вкладки Дзен')
+    def wait_for_new_window(self, expected_url):
+        WebDriverWait(self.driver, 10).until(EC.url_changes(URLS.BLANK_URL))
+        return WebDriverWait(self.driver, 10).until(EC.url_to_be(expected_url))
 
     @allure.step('Ищем элемент по локатору')
     def find_element(self, locator):
@@ -33,11 +41,6 @@ class BasePage:
     def set_value(self, locator, value):
         self.find_element(locator).send_keys(value)
 
-    @allure.step('Ждем загрузки новой вкладки Дзен')
-    def wait_for_new_window(self, expected_url=URLS.DZEN_URL):
-        WebDriverWait(self.driver, 5).until(EC.url_changes(URLS.BLANK_URL))
-        return WebDriverWait(self.driver, 5).until(EC.url_to_be(expected_url))
-
     @allure.step("Проверяем наличие элемента")
     def is_element_present(self,locator, timeout=10):
         try:
@@ -49,4 +52,3 @@ class BasePage:
     @allure.step("Переключаемся на другую вкладку")
     def switch_to_new_window(self):
         self.driver.switch_to.window(self.driver.window_handles[-1])
-
